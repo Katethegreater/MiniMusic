@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="theme-color" content="#f7f5ee">
+<title>MiniMusic Studio</title>
+<link rel="stylesheet" href="studio.css">
+<script src="studio.js" defer></script>
+</head>
+<body>
+<header class="top">
+  <div class="top-inner">
+    <div class="brand"><span class="logo" aria-hidden="true">♫</span><span>MiniMusic<small>INSTRUMENT STUDIO</small></span></div>
+    <nav aria-label="Workspace">
+      <button id="compose-tab" class="nav-button selected" aria-current="page"><span aria-hidden="true">✎</span> Compose</button>
+      <button id="learn-tab" class="nav-button"><span aria-hidden="true">▷</span> Learn</button>
+    </nav>
+    <button id="library" class="outline"><span aria-hidden="true">▤</span> My songs</button>
+  </div>
+</header>
+<main>
+  <div class="intro">
+    <div>
+      <h1 id="page-title">Compose</h1>
+      <p id="page-description">Play your instrument, one note at a time, and turn it into a song.</p>
+    </div>
+    <button id="new-song" class="outline">＋ New song</button>
+  </div>
+  <div class="workspace">
+    <div class="left">
+      <section class="card instrument-card" aria-labelledby="instrument-heading">
+        <div class="card-head">
+          <div><h2 id="instrument-heading">Instrument</h2><p id="instrument-instruction">Tap a note to add it to your song.</p></div>
+          <button id="setup" class="outline"><span aria-hidden="true">⚙︎</span> Setup</button>
+        </div>
+        <div class="instrument-toolbar">
+          <div class="segments" aria-label="Instrument type">
+            <button id="kalimba" aria-pressed="true">Kalimba</button>
+            <button id="lyre" aria-pressed="false">Lyre</button>
+          </div>
+          <span class="tuning-label" id="tuning-label"></span>
+        </div>
+        <div class="stage">
+          <div class="instrument-scroll">
+            <div id="instrument" class="instrument" role="group" aria-label="Playable instrument"></div>
+          </div>
+        </div>
+        <div class="instrument-footer"><span id="range"></span><span><i></i> <span id="instrument-status">Ready to play</span></span></div>
+      </section>
+      <section id="chord-card" class="card chord-card" aria-labelledby="chord-heading">
+        <div class="card-head">
+          <div><h2 id="chord-heading">Chord suggestions</h2><p id="chord-description">Select a note to see two-note combinations.</p></div>
+        </div>
+        <div id="chords" class="chords"></div>
+      </section>
+    </div>
+    <section class="card song-card" aria-labelledby="song-heading">
+      <div class="card-head song-head">
+        <div><h2 id="song-heading">Your song</h2><p>Letter notes</p></div>
+        <button id="save" class="outline">Save song</button>
+      </div>
+      <label class="song-label" for="title">SONG TITLE</label>
+      <input id="title" maxlength="80" placeholder="Untitled song" autocomplete="off">
+      <div class="sequence-header"><span>NOTE SEQUENCE</span><span id="note-count"></span></div>
+      <div id="sequence" class="sequence" aria-label="Song notes"></div>
+      <div id="edit-controls" class="editing">
+        <label>Length <select id="length"><option value="0.5">½ beat</option><option value="1">1 beat</option><option value="2">2 beats</option><option value="4">4 beats</option></select></label>
+        <button id="rest" class="text-button">＋ Rest</button>
+        <button id="remove" class="text-button">Remove</button>
+      </div>
+      <div class="transport">
+        <div class="tempo-line"><label for="tempo">Tempo</label><span><output id="bpm">90</output> BPM</span></div>
+        <input id="tempo" type="range" min="40" max="180" value="90">
+        <div id="speed-controls" class="tempo-line" hidden><label for="speed">Practice speed</label><select id="speed"><option value="1">100%</option><option value=".75">75%</option><option value=".5">50%</option><option value=".25">25%</option></select></div>
+        <button id="play" class="primary"><span aria-hidden="true">▶</span> Play song</button>
+      </div>
+    </section>
+  </div>
+</main>
+<dialog id="setup-dialog">
+  <form id="setup-form">
+    <div class="dialog-head"><h2>Instrument setup</h2><button type="button" class="close" aria-label="Close">×</button></div>
+    <p>Match the notes to your physical instrument.</p>
+    <label>Number of <span id="parts-label"></span><input id="part-count" type="number" min="3" max="34" required></label>
+    <button type="button" id="preset" class="outline">Fill with C major preset</button>
+    <label>Notes in physical order, left to right<textarea id="tuning" rows="3" required></textarea></label>
+    <p class="hint">Separate notes with spaces, such as C4 D4 F#4. The number indicates the octave.</p>
+    <p id="setup-error" role="alert" class="error"></p>
+    <button class="primary" type="submit">Apply setup</button>
+  </form>
+</dialog>
+<dialog id="library-dialog">
+  <div class="dialog-head"><h2>My songs</h2><button type="button" class="close" aria-label="Close">×</button></div>
+  <p>Open a saved song to compose or practice.</p>
+  <div id="song-list"></div>
+</dialog>
+<div id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
