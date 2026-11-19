@@ -21,3 +21,5 @@ The debug app supports Android 6.0 and later. The studio assets in `app/src/main
 ## GitHub Actions
 
 The **Android APK** workflow builds and lints the debug APK for pushes and pull requests targeting `main`. You can also run it manually from the **Actions** tab. Open a successful run and download **MiniMusic-debug-apk** from **Artifacts**.
+
+Published versions also offer a standalone `MiniMusic.apk` under **Assets** on the [GitHub Releases page](https://github.com/Katethegreater/MiniMusic/releases). Pushing a version tag such as `v1.0.0` builds, lints, and publishes the APK.
