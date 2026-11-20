@@ -64,9 +64,14 @@
       <label class="song-label" for="title">SONG TITLE</label>
       <input id="title" maxlength="80" placeholder="Untitled song" autocomplete="off">
       <div class="sequence-header"><span>NOTE SEQUENCE</span><span id="note-count"></span></div>
+      <div id="sequence-actions" class="editing sequence-actions" aria-label="Sequence editing">
+        <button id="multi-select" class="outline" aria-pressed="false">Multi-select</button>
+        <button id="copy-notes" class="outline">Copy</button>
+        <button id="paste-notes" class="outline" title="Paste after selection, or at the end">Paste</button>
+      </div>
       <div id="sequence" class="sequence" aria-label="Song notes"></div>
       <div id="edit-controls" class="editing">
-        <label>Length <select id="length"><option value="0.5">½ beat</option><option value="1">1 beat</option><option value="2">2 beats</option><option value="4">4 beats</option></select></label>
+        <label>Length <select id="length"><option value="" disabled hidden>Mixed</option><option value="0.5">½ beat</option><option value="1">1 beat</option><option value="2">2 beats</option><option value="3">3 beats</option><option value="4">4 beats</option></select></label>
         <button id="rest" class="text-button">＋ Rest</button>
         <button id="remove" class="text-button">Remove</button>
       </div>
@@ -93,8 +98,10 @@
 </dialog>
 <dialog id="library-dialog">
   <div class="dialog-head"><h2>My songs</h2><button type="button" class="close" aria-label="Close">×</button></div>
-  <p>Open a saved song to compose or practice.</p>
+  <h3 id="saved-heading">Saved songs</h3>
   <div id="song-list"></div>
+  <h3>Starter tunes</h3>
+  <div id="starter-list"></div>
 </dialog>
 <div id="toast" role="status" aria-live="polite"></div>
 </body>
